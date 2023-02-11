@@ -1,0 +1,31 @@
+.container2 {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .row2 {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-md-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    padding: 15px;
+  }
+  
+  .col-md-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+    padding: 15px;
+  }
+  
+  @media (max-width: 767px) {
+    .col-md-2, .col-md-8 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
