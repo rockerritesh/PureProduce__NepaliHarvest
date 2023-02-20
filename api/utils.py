@@ -1,13 +1,13 @@
-from rest_framework import renderers
-import json
+from django.core.mail import EmailMessage
+import os
 
-#to customize json response 
-class UserRenderer(renderers.JSONRenderer):
-    charset='utf-8'
-    def render(self, data, accepted_media_type=None, renderer_context=None):
-        response = ''
-        if 'ErrorDetail' in str(data):
-            response = json.dumps({'errors':data})
-        else:
-            response = json.dumps(data)
-        return response
+class Util:
+    @staticmethod
+    def send_email(data):
+        email = EmailMessage(
+            subject=data['subject'],
+            body = data['body'],
+            from_email=os.environ.get('EMAIL_FROM'),
+            to = [data['to_email']]
+        )
+        email.send()

@@ -5,3 +5,5 @@ db.sqlite3
 *.env
 .vscode
 Pipfile
+Pipfile.lock
+virtualenv
