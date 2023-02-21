@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from .forms import ProductForm
+from .forms import ProductForm, CommentForm
 
 def add_product(request):
     if request.method == 'POST':
@@ -11,4 +11,16 @@ def add_product(request):
             return JsonResponse({'success': False, 'errors': form.errors})
     else:
         form = ProductForm()
+    return JsonResponse({'html': form.as_p()})
+
+
+def add_comment(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+    else:
+        form = CommentForm()
     return JsonResponse({'html': form.as_p()})

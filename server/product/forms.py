@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, Comment
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -9,3 +9,8 @@ class ProductForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'rows': 3}),
             'image': forms.ClearableFileInput(attrs={'multiple': True}),
         }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('product_id','name', 'body')

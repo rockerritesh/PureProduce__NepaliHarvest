@@ -10,3 +10,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    product_id = models.CharField(max_length=80)
+    name = models.CharField(max_length=80)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_on']
