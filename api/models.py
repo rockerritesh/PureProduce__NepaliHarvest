@@ -5,7 +5,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 class UserManager(BaseUserManager):
     def create_user(self, email, name, password=None, password2=None):
         """
-        Creates and saves a User with the given email, name,tc and password.
+        Creates and saves a User with the given email, name and password.
         """
         if not email:
             raise ValueError('Users must have an email address')
@@ -38,13 +38,18 @@ class User(AbstractBaseUser):
         verbose_name='Email',
         max_length=255,
         unique=True,
-    )
+    )    
     name = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    profile_image = models.ImageField(upload_to="profiles/", null=True, blank=True)
+    phone_number = models.CharField(max_length=14, default='')
+    citizenship_image = models.ImageField(upload_to='citizenship/', null=True, blank=True)
+    citizenship_id_number = models.CharField(max_length=50, default='')
+    status = models.CharField(max_length=10, default='inactive')
+    
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -62,7 +67,7 @@ class User(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
-
+    
     @property
     def is_staff(self):
         "Is the user a member of staff?"
